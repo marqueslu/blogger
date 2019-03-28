@@ -15,7 +15,7 @@ namespace blogger.infra.DataContext
         {
             this.configuration = configuration;
             
-            Connection = new SqlConnection(this.configuration.GetConnectionString("connectionString"));            
+            Connection = new SqlConnection(this.configuration.GetConnectionString("Blogger"));            
 
             Connection.Open();
         }

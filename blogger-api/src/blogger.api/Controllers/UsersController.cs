@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using System.Collections.Generic;
+using blogger.api.Models;
+using blogger.domain.Entities;
+using blogger.domain.Repositories;
+using blogger.domain.ValueObjects;
 using Microsoft.AspNetCore.Mvc;
 
 namespace blogger.api.Controllers
@@ -11,6 +11,12 @@ namespace blogger.api.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
+
+        private readonly IUserRepository _userRepository;
+        public UsersController(IUserRepository userRepository)
+        {
+            _userRepository = userRepository;
+        }
         // GET: api/Users
         [HttpGet]
         public IEnumerable<string> Get()
@@ -27,8 +33,10 @@ namespace blogger.api.Controllers
 
         // POST: api/Users
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void Post([FromBody]UserViewModel userInput)
         {
+            var user = new User(new Name(userInput.FirstName, userInput.LastName), new Email(userInput.Email), userInput.Password);
+            _userRepository.Save(user);
         }
 
         // PUT: api/Users/5
