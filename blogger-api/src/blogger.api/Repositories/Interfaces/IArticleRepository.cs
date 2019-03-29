@@ -1,15 +1,15 @@
-﻿using blogger.domain.Entities;
+﻿using blogger.api.Models;
 using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 using System.Threading.Tasks;
 
-namespace blogger.domain.Repositories
+namespace blogger.api.Repositories.Interfaces
 {
-    public interface IArticlesRepository
+    public interface IArticleRepository
     {
         Task<bool> CheckArticleTitle(string title);
-        Task Save(Article article);
+        Task Create(Article article);
         Task Update(Article user);
         Task<IEnumerable<Article>> GetAll();
         Task<Article> GetArticle(int id);

@@ -33,9 +33,9 @@ namespace blogger.api.Controllers
 
         // POST: api/Users
         [HttpPost]
-        public void Post([FromBody]UserViewModel userInput)
+        public void Post([FromBody] Models.User userInput)
         {
-            var user = new User(new Name(userInput.FirstName, userInput.LastName), new Email(userInput.Email), userInput.Password);
+            var user = new domain.Entities.User(new Name(userInput.FirstName, userInput.LastName), new Email(userInput.Email), userInput.Password);
             _userRepository.Save(user);
         }
 
