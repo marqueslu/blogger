@@ -1,5 +1,7 @@
-﻿using blogger.api.Models;
+﻿using blogger.api.DataContext;
+using blogger.api.Models;
 using blogger.api.Repositories.Interfaces;
+using Dapper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +11,12 @@ namespace blogger.api.Repositories
 {
     public class UserRepository : IUserRepository
     {
+        private readonly BloggerDataContext _context;
+
+        public UserRepository(BloggerDataContext context)
+        {
+            _context = context;
+        }
         public Task<bool> CheckEmail(string email)
         {
             throw new NotImplementedException();
@@ -27,6 +35,7 @@ namespace blogger.api.Repositories
         public Task<IEnumerable<User>> GetAll()
         {
             throw new NotImplementedException();
+
         }
 
         public Task<User> GetUser(Guid id)

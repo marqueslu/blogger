@@ -10,9 +10,9 @@ namespace blogger.api.Repositories.Interfaces
     {
         Task<bool> CheckArticleTitle(string title);
         Task Create(Article article);
-        Task Update(Article user);
+        Task Update(int id, Article article);
         Task<IEnumerable<Article>> GetAll();
-        Task<Article> GetArticle(int id);
+        Task<IEnumerable<Article>> GetArticle(int id);
         Task<IEnumerable<Article>> GetArticlesByUser(int userId);
         Task Delete(int id);
     }

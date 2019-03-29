@@ -1,10 +1,7 @@
 ﻿using System.Collections.Generic;
 using blogger.api.Models;
-using blogger.domain.Entities;
-using blogger.domain.Repositories;
-using blogger.domain.ValueObjects;
+using blogger.api.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-
 namespace blogger.api.Controllers
 {
     [Route("api/[controller]")]
@@ -33,10 +30,9 @@ namespace blogger.api.Controllers
 
         // POST: api/Users
         [HttpPost]
-        public void Post([FromBody] Models.User userInput)
-        {
-            var user = new domain.Entities.User(new Name(userInput.FirstName, userInput.LastName), new Email(userInput.Email), userInput.Password);
-            _userRepository.Save(user);
+        public void Post([FromBody]User userInput)
+        {            
+            //_userRepository.Create(user);
         }
 
         // PUT: api/Users/5

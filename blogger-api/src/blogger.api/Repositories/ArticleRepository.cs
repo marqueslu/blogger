@@ -1,5 +1,7 @@
-﻿using blogger.api.Models;
+﻿using blogger.api.DataContext;
+using blogger.api.Models;
 using blogger.api.Repositories.Interfaces;
+using Dapper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,24 +11,32 @@ namespace blogger.api.Repositories
 {
     public class ArticleRepository : IArticleRepository
     {
+        private readonly BloggerDataContext _context;
+        public ArticleRepository(BloggerDataContext context)
+        {
+            _context = context;
+        }
         public Task<bool> CheckArticleTitle(string title)
         {
             throw new NotImplementedException();
         }
 
-        public Task Delete(int id)
+        public async Task Delete(int id)
         {
-            throw new NotImplementedException();
+            string sQuery = "DELETE FROM ARTICLE WHERE Id = @Id";
+            await _context.Connection.QueryAsync(sQuery, new { Id = id });
         }
 
         public Task<IEnumerable<Article>> GetAll()
         {
-            throw new NotImplementedException();
+            string sQuery = "SELECT Id, Title, Content, CreatedAt FROM ARTICLE";
+            return _context.Connection.QueryAsync<Article>(sQuery, new { });
         }
 
-        public Task<Article> GetArticle(int id)
+        public async Task<IEnumerable<Article>> GetArticle(int id)
         {
-            throw new NotImplementedException();
+            string sQuery = "SELECT Id, Title, Content, CreatedAt FROM ARTICLE WHERE Id = @Id";
+            return await _context.Connection.QueryAsync<Article>(sQuery, new { Id = id});
         }
 
         public Task<IEnumerable<Article>> GetArticlesByUser(int userId)
@@ -34,14 +44,29 @@ namespace blogger.api.Repositories
             throw new NotImplementedException();
         }
 
-        public Task Create(Article article)
+        public async Task Create(Article article)
         {
-            throw new NotImplementedException();
+            string query = "INSERT INTO ARTICLE(Title, Content, CreatedAt) VALUES(@Title, @Content, @CreatedAt)";
+            await _context.Connection.QueryAsync(query,
+                new
+                {
+                    Title = article.Title,
+                    Content = article.Content,
+                    CreatedAt = article.CreatedAt
+                });
         }
 
-        public Task Update(Article user)
+        public async Task Update(int id, Article article)
         {
-            throw new NotImplementedException();
+            string query = "UPDATE ARTICLE SET Title = @Title, Content = @Content Where Id = @Id";
+            await _context.Connection.QueryAsync(query,
+                new
+                {
+                    Id = id,
+                    Title = article.Title,
+                    Content = article.Content,
+                    CreatedAt = article.CreatedAt
+                });
         }
     }
 }

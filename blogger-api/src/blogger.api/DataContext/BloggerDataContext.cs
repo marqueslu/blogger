@@ -8,25 +8,22 @@ using System.Threading.Tasks;
 
 namespace blogger.api.DataContext
 {
-    public class BloggerDataContext
+    public class BloggerDataContext : IDisposable
     {
-        public class BloggerDataContext : IDisposable
+        public SqlConnection Connection { get; set; }
+        private IConfiguration configuration;
+        public BloggerDataContext(IConfiguration configuration)
         {
-            public SqlConnection Connection { get; set; }
-            private IConfiguration configuration;
-            public BloggerDataContext(IConfiguration configuration)
-            {
-                this.configuration = configuration;
+            this.configuration = configuration;
 
-                Connection = new SqlConnection(this.configuration.GetConnectionString("Blogger"));
+            Connection = new SqlConnection(this.configuration.GetConnectionString("Blogger"));
 
-                Connection.Open();
-            }
-            public void Dispose()
-            {
-                if (Connection.State != ConnectionState.Closed)
-                    Connection.Close();
-            }
+            Connection.Open();
+        }
+        public void Dispose()
+        {
+            if (Connection.State != ConnectionState.Closed)
+                Connection.Close();
         }
     }
 }

@@ -23,6 +23,7 @@ namespace blogger.api
         {
             services.AddScoped<BloggerDataContext, BloggerDataContext>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IArticleRepository, ArticleRepository>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddCors();
         }
