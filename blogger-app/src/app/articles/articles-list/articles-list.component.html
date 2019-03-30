@@ -1,0 +1,18 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 button-header-articles">
+      <a class="btn btn-primary float-right" href="#" role="button">New Article</a>
+    </div>
+    <div class="col-md-12">
+      <div class="card card-list-articles" *ngFor="let article of articles">
+        <div class="card-body">
+          <h5 class="card-title">{{ article.title }}</h5>
+          <p class="card-text">{{ article.content }}</p>
+          <a href="#" class="card-link">Show</a>
+          <a href="#" class="card-link text-success">Edit</a>
+          <a href="#" class="card-link text-danger">Delete</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
