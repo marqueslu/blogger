@@ -1,0 +1,54 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <form class="needs-validation" novalidate [formGroup]="form">
+        <div class="form-row">
+          <div class="col-sm-12">
+            <label for="title">Title</label>
+            <input
+              type="text"
+              class="form-control"
+              id="validationCustom01"
+              placeholder="Article title"
+              formControlName="title"
+              [ngClass]="{ 'is-invalid': submitted && hasError('title') }"
+            />
+            <div
+              class="invalid-feedback"
+              *ngIf="hasError('title') && hasError('title')['required']"
+            >
+              Please inform a title for the article.
+            </div>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="col-sm-12">
+            <label for="content">Content</label>
+            <textarea
+              class="form-control"
+              id="exampleFormControlTextarea1"
+              rows="10"
+              formControlName="content"
+              [ngClass]="{ 'is-invalid': submitted && hasError('content') }"
+              placeholder="Your article here"
+            ></textarea>
+            <div
+              class="invalid-feedback"
+              *ngIf="hasError('content') && hasError('content')['required']"
+            >
+              Your article must have a content.
+            </div>
+          </div>
+        </div>
+        <div style="margin-top: 1em;">
+          <button type="submit" class="btn btn-primary" (click)="onSubmit()">
+            Save
+          </button>
+          <button type="submit" class="btn btn-default" (click)="onCancel()">
+            Cancel
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

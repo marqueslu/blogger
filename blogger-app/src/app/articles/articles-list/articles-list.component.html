@@ -1,10 +1,10 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12 button-header-articles">
-      <a class="btn btn-primary float-right" href="#" role="button">New Article</a>
+      <a class="btn btn-primary float-right" [routerLink]="['new']" role="button">New Article</a>
     </div>
     <div class="col-md-12">
-      <div class="content" *ngIf="articles$ | async as articles; else loadingError">
+      <div class="content" *ngIf="articles$ | async as articles; else loading">
         <div class="card card-list-articles" *ngFor="let article of articles">
           <div class="card-body">
             <h5 class="card-title">{{ article.title }}</h5>
@@ -15,15 +15,15 @@
           </div>
         </div>
       </div>
+      <ng-template #loading>
+        <span>Loading...</span>
+      </ng-template>
 
-      <ng-template #loadingError>
+      <!-- <ng-template #loadingError>
         <div *ngIf="error$ | async; else loading">
           Failed to load data
         </div>
-        <ng-template #loading>
-          <span>Loading...</span>
-        </ng-template>
-      </ng-template>
+      </ng-template> -->
     </div>
   </div>
 </div>
