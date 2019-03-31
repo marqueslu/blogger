@@ -3,6 +3,8 @@ import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { ArticlesService } from "../articles.service";
 import { AlertModalService } from "src/app/shared/alert-modal.service";
 import { Location } from "@angular/common";
+import { ActivatedRoute } from "@angular/router";
+import { map, switchMap } from "rxjs/operators";
 
 @Component({
   selector: "app-articles-form",
@@ -12,17 +14,27 @@ import { Location } from "@angular/common";
 export class ArticlesFormComponent implements OnInit {
   form: FormGroup;
   submitted = false;
-  
+
   constructor(
     private fb: FormBuilder,
     private service: ArticlesService,
     private modal: AlertModalService,
-    private location: Location,    
-  ) {    
-  }
+    private location: Location,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit() {
+    this.route.params
+      .pipe(
+        map((params: any) => params["id"]),
+        switchMap(id => this.service.loadById(id))
+      )
+      .subscribe(article => {
+        this.updateForm(article);
+      });
+
     this.form = this.fb.group({
+      id: [null],
       title: [
         null,
         [
@@ -35,13 +47,21 @@ export class ArticlesFormComponent implements OnInit {
     });
   }
 
+  updateForm(article) {
+    this.form.patchValue({
+      id: article.id,
+      title: article.title,
+      content: article.content
+    });
+  }
+
   onSubmit() {
     this.submitted = true;
     if (this.form.valid) {
       this.service.crate(this.form.value).subscribe(
         sucess => {
           this.modal.showAlertSuccess("Created with success!");
-          this.location.back();          
+          this.location.back();
         },
         error =>
           this.modal.showAlertDanger(

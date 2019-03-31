@@ -16,7 +16,16 @@ export class ArticlesService {
     return this.http.get<Article[]>(this.API);
   }
 
+  loadById(id){
+    return this.http.get(`${this.API}/${id}`).pipe(take(1));
+  }
+
   crate(article){
     return this.http.post(this.API, article).pipe(take(1));
+  }
+
+  delete(id){
+    console.log('chegue');
+    return this.http.delete(`${this.API}/${id}`).pipe(take(1));
   }
 }
