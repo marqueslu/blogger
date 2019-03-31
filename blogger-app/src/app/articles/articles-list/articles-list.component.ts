@@ -3,8 +3,7 @@ import { ArticlesService } from '../articles.service';
 import { Article } from './article';
 import { Observable, empty, Subject } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
-import { AlertModalComponent } from 'src/app/shared/alert-modal/alert-modal.component';
+import { AlertModalService } from 'src/app/shared/alert-modal.service';
 
 @Component({
   selector: 'app-articles-list',
@@ -16,24 +15,21 @@ export class ArticlesListComponent implements OnInit {
   articles: Article[];
   articles$: Observable<Article[]>
   error$ = new Subject<boolean>();
-  bsModalRef : BsModalRef;
-  constructor(private service: ArticlesService, private bsModalService: BsModalService) { }
 
-  ngOnInit() {
-    // this.service.list().subscribe(articles => this.articles = articles);
+  constructor(private service: ArticlesService, private alertService: AlertModalService) { }
+
+  ngOnInit() {    
     this.articles$ = this.service.list().pipe(
       catchError(error => {
-        console.log(error);
-        // this.error$.next(true);
+        console.log(error);        
         this.handleError();
         return empty();
       })
     );
   }
+
   handleError(){
-    this.bsModalRef = this.bsModalService.show(AlertModalComponent);
-    this.bsModalRef.content.type = 'danger';
-    this.bsModalRef.content.message = 'Failed to load articles.';
+    this.alertService.showAlertDanger('Failed to load the articles.');
   }
 
 }
