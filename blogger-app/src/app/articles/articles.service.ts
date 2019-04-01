@@ -17,7 +17,7 @@ export class ArticlesService {
   }
 
   loadById(id){
-    return this.http.get(`${this.API}/${id}`).pipe(take(1));
+    return this.http.get<Article>(`${this.API}/${id}`).pipe(take(1));
   }
 
   crate(article){

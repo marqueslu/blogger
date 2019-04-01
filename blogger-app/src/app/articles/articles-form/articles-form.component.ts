@@ -24,36 +24,37 @@ export class ArticlesFormComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.route.params
-      .pipe(
-        map((params: any) => params["id"]),
-        switchMap(id => this.service.loadById(id))
-      )
-      .subscribe(article => {
-        this.updateForm(article);
-      });
+    // this.route.params
+    //   .pipe(
+    //     map((params: any) => params["id"]),
+    //     switchMap(id => this.service.loadById(id))
+    //   )
+    //   .subscribe(article => {
+    //     this.updateForm(article);
+    //   });
 
+    const article = this.route.snapshot.data["article"];
     this.form = this.fb.group({
-      id: [null],
+      id: [article.id],
       title: [
-        null,
+        article.title,
         [
           Validators.required,
           Validators.minLength(3),
           Validators.maxLength(200)
         ]
       ],
-      content: [null, [Validators.required, Validators.minLength(20)]]
+      content: [article.content, [Validators.required, Validators.minLength(20)]]
     });
   }
 
-  updateForm(article) {
-    this.form.patchValue({
-      id: article.id,
-      title: article.title,
-      content: article.content
-    });
-  }
+  // updateForm(article) {
+  //   this.form.patchValue({
+  //     id: article.id,
+  //     title: article.title,
+  //     content: article.content
+  //   });
+  // }
 
   onSubmit() {
     this.submitted = true;
