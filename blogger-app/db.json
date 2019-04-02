@@ -9,16 +9,6 @@
       "id": 2,
       "title": "My second Article",
       "content": "This is my article 2"
-    },
-    {
-      "id": 3,
-      "title": "sfsfsfdsfsfsdfdsfsdfsfsdf",
-      "content": "dfadfadfasfafdfaffadf dffadfadfaf dfafd"
-    },
-    {
-      "id": 4,
-      "title": "dsfsfsdsdfdsdsfsfsdsdfdsdsfsfsdsdfdsdsfsfsdsdfds",
-      "content": "dsfsfsdsdfdsdsfsfsdsdfdsdsfsfsdsdfdsdsfsfsdsdfdsdsfsfsdsdfdsdsfsfsdsdfdsdsfsfsdsdfds"
-    }
+    }    
   ]
 }

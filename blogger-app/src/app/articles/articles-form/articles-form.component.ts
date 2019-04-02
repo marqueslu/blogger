@@ -4,7 +4,6 @@ import { ArticlesService } from "../articles.service";
 import { AlertModalService } from "src/app/shared/alert-modal.service";
 import { Location } from "@angular/common";
 import { ActivatedRoute } from "@angular/router";
-import { map, switchMap } from "rxjs/operators";
 
 @Component({
   selector: "app-articles-form",
@@ -24,15 +23,6 @@ export class ArticlesFormComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    // this.route.params
-    //   .pipe(
-    //     map((params: any) => params["id"]),
-    //     switchMap(id => this.service.loadById(id))
-    //   )
-    //   .subscribe(article => {
-    //     this.updateForm(article);
-    //   });
-
     const article = this.route.snapshot.data["article"];
     this.form = this.fb.group({
       id: [article.id],
@@ -51,18 +41,9 @@ export class ArticlesFormComponent implements OnInit {
     });
   }
 
-  // updateForm(article) {
-  //   this.form.patchValue({
-  //     id: article.id,
-  //     title: article.title,
-  //     content: article.content
-  //   });
-  // }
-
   onSubmit() {
     this.submitted = true;
     if (this.form.valid) {
-      
       let messageSuccess = "Created with success!";
       let errorMessage = "Error during the criation the article, try again!";
 
@@ -79,29 +60,6 @@ export class ArticlesFormComponent implements OnInit {
           this.modal.showAlertDanger(errorMessage);
         }
       );
-      // if (this.form.value.id) {
-      //   this.service.update(this.form.value).subscribe(
-      //     sucess => {
-      //       this.modal.showAlertSuccess("update with success!");
-      //       this.location.back();
-      //     },
-      //     error =>
-      //       this.modal.showAlertDanger(
-      //         "Error during the update the article, try again!"
-      //       )
-      //   );
-      // } else {
-      //   this.service.crate(this.form.value).subscribe(
-      //     sucess => {
-      //       this.modal.showAlertSuccess("Created with success!");
-      //       this.location.back();
-      //     },
-      //     error =>
-      //       this.modal.showAlertDanger(
-      //         "Error during the criation the article, try again!"
-      //       )
-      //   );
-      // }
     }
   }
 

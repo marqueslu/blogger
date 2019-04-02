@@ -20,7 +20,7 @@ export class ArticlesService {
     return this.http.get<Article>(`${this.API}/${id}`).pipe(take(1));
   }
 
-  private crate(article){
+  private crate(article: Article){
     return this.http.post(this.API, article).pipe(take(1));
   }
 
@@ -29,11 +29,11 @@ export class ArticlesService {
     return this.http.delete(`${this.API}/${id}`).pipe(take(1));
   }
 
-  private update(article){
+  private update(article: Article){
     return this.http.put(`${this.API}/${article.id}`, article).pipe(take(1));
   }
 
-  save(article){
+  save(article: Article){
     if(article.id){
       return this.update(article);
     } else{
