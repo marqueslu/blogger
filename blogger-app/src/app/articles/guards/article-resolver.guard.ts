@@ -7,7 +7,7 @@ import {
   Resolve
 } from "@angular/router";
 import { Observable, of } from "rxjs";
-import { Article } from "../articles-list/article";
+import { Article } from "../article";
 import { ArticlesService } from "../articles.service";
 
 @Injectable({
@@ -27,7 +27,8 @@ export class ArticleResolverGuard implements Resolve<Article> {
     return of({
       id: null,
       title: null,
-      content: null
+      content: null,
+      createdAt: null
     });
   }
 }

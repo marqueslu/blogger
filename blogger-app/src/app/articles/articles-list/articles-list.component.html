@@ -9,6 +9,7 @@
       <div class="card card-list-articles" *ngFor="let article of articles">
         <div class="card-body">
           <h5 class="card-title">{{ article.title }}</h5>
+          <p>{{ article.createdAt | date: 'longDate' }}</p>
           <p class="card-text">{{ article.content }}</p>
           <button
             class="btn btn-outline-secondary mb-1 btn-sm"
@@ -18,7 +19,7 @@
           </button>
           <button
             class="btn btn-outline-danger mb-1 btn-sm"
-            (click)="onDelete(article.id)"
+            (click)="onDelete(article)"
           >
             Delete
           </button>
@@ -30,3 +31,11 @@
     </ng-template>
   </div>
 </div>
+
+<ng-template #deleteModal>
+  <div class="modal-body text-center">
+    <p>Do you want to remove the article?</p>
+    <button type="button" class="btn btn-default" (click)="onConfirmDelete()">Yes</button>
+    <button type="button" class="btn btn-primary" (click)="onDeclineDelete()">No</button>
+  </div>
+</ng-template>

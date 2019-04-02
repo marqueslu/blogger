@@ -37,7 +37,8 @@ export class ArticlesFormComponent implements OnInit {
       content: [
         article.content,
         [Validators.required, Validators.minLength(20)]
-      ]
+      ],
+      createdAt: [article.createdAt]
     });
   }
 
