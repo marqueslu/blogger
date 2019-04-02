@@ -7,7 +7,7 @@ import {
   Resolve
 } from "@angular/router";
 import { Observable, of } from "rxjs";
-import { Article } from "../article";
+import { Article } from "../../models/article";
 import { ArticlesService } from "../articles.service";
 
 @Injectable({

@@ -1,19 +1,38 @@
-<p>
-  users-list works!
-</p>
-<p>
-  users-list works!
-</p>
-
-<p>
-  users-list works!
-</p>
-<p>
-  users-list works!
-</p>
-<p>
-  users-list works!
-</p>
-<p>
-  users-list works!
-</p>
+<div class="row">
+  <div class="col-md-12">
+    <a class="btn btn-primary float-right" [routerLink]="['new']" role="button"
+      >New Article</a
+    >
+  </div>
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">First Name</th>
+              <th scope="col">Last Name</th>
+              <th scope="col">Handle</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let user of (users$ | async)">
+              <td>{{ user.id }}</td>
+              <td>{{ user.firstName }}</td>
+              <td>{{ user.lastName }}</td>
+              <td>{{ user.email }}</td>
+              <td>
+                <span class="float-right actions-users"
+                  ><button class="btn btn-dark">Update</button>
+                  <button class="btn btn-danger">Delete</button></span
+                >
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

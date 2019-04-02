@@ -2,13 +2,21 @@
   "articles": [
     {
       "id": 1,
-      "title": "My third Articlef fdf",
+      "title": "My third Article",
       "content": "This is my article third dadsdad"
     },
     {
       "id": 2,
       "title": "My second Article",
       "content": "This is my article 2"
-    }    
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "firstName": "Lucas",
+      "lastName": "Marques",
+      "email": "teste@teste.com"
+    }
   ]
 }

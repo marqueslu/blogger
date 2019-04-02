@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { ArticlesService } from "../articles.service";
-import { Article } from "../article";
+import { Article } from "../../models/article";
 import { Observable, empty, Subject } from "rxjs";
 import { catchError } from "rxjs/operators";
 import { AlertModalService } from "src/app/shared/alert-modal.service";
@@ -37,8 +37,7 @@ export class ArticlesListComponent implements OnInit {
 
   onRefresh() {
     this.articles$ = this.service.list().pipe(
-      catchError(error => {
-        console.log(error);
+      catchError(error => {        
         this.handleError();
         return empty();
       })
