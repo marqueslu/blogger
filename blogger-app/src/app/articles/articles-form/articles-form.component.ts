@@ -44,7 +44,10 @@ export class ArticlesFormComponent implements OnInit {
           Validators.maxLength(200)
         ]
       ],
-      content: [article.content, [Validators.required, Validators.minLength(20)]]
+      content: [
+        article.content,
+        [Validators.required, Validators.minLength(20)]
+      ]
     });
   }
 
@@ -59,16 +62,46 @@ export class ArticlesFormComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
     if (this.form.valid) {
-      this.service.crate(this.form.value).subscribe(
-        sucess => {
-          this.modal.showAlertSuccess("Created with success!");
+      
+      let messageSuccess = "Created with success!";
+      let errorMessage = "Error during the criation the article, try again!";
+
+      if (this.form.value.id) {
+        messageSuccess = "Updated with success!";
+        errorMessage = "Error during the update the article, try again!";
+      }
+      this.service.save(this.form.value).subscribe(
+        success => {
+          this.modal.showAlertSuccess(messageSuccess);
           this.location.back();
         },
-        error =>
-          this.modal.showAlertDanger(
-            "Error during the criation the article, try again!"
-          )
+        error => {
+          this.modal.showAlertDanger(errorMessage);
+        }
       );
+      // if (this.form.value.id) {
+      //   this.service.update(this.form.value).subscribe(
+      //     sucess => {
+      //       this.modal.showAlertSuccess("update with success!");
+      //       this.location.back();
+      //     },
+      //     error =>
+      //       this.modal.showAlertDanger(
+      //         "Error during the update the article, try again!"
+      //       )
+      //   );
+      // } else {
+      //   this.service.crate(this.form.value).subscribe(
+      //     sucess => {
+      //       this.modal.showAlertSuccess("Created with success!");
+      //       this.location.back();
+      //     },
+      //     error =>
+      //       this.modal.showAlertDanger(
+      //         "Error during the criation the article, try again!"
+      //       )
+      //   );
+      // }
     }
   }
 

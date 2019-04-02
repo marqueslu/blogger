@@ -20,12 +20,24 @@ export class ArticlesService {
     return this.http.get<Article>(`${this.API}/${id}`).pipe(take(1));
   }
 
-  crate(article){
+  private crate(article){
     return this.http.post(this.API, article).pipe(take(1));
   }
 
   delete(id){
     console.log('chegue');
     return this.http.delete(`${this.API}/${id}`).pipe(take(1));
+  }
+
+  private update(article){
+    return this.http.put(`${this.API}/${article.id}`, article).pipe(take(1));
+  }
+
+  save(article){
+    if(article.id){
+      return this.update(article);
+    } else{
+      return this.crate(article);
+    }
   }
 }
