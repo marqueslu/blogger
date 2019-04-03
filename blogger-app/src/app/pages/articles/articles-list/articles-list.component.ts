@@ -1,11 +1,13 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
-import { ArticlesService } from "../articles.service";
-import { Article } from "../../models/article";
+import { ArticlesService } from "../../../services/articles.service";
+
 import { Observable, empty, Subject } from "rxjs";
 import { catchError } from "rxjs/operators";
-import { AlertModalService } from "src/app/shared/alert-modal.service";
+
 import { Router, ActivatedRoute } from "@angular/router";
 import { BsModalService, BsModalRef } from "ngx-bootstrap/modal";
+import { Article } from 'src/app/models/article';
+import { AlertModalService } from '../../shared/alert-modal.service';
 
 @Component({
   selector: "app-articles-list",

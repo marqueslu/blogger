@@ -7,8 +7,10 @@ import {
   Resolve
 } from "@angular/router";
 import { Observable, of } from "rxjs";
-import { Article } from "../../models/article";
-import { ArticlesService } from "../articles.service";
+
+import { ArticlesService } from "../../../services/articles.service";
+import { Article } from '../../../models/article';
+
 
 @Injectable({
   providedIn: "root"

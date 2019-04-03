@@ -1,9 +1,10 @@
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
-import { ArticlesService } from "../articles.service";
-import { AlertModalService } from "src/app/shared/alert-modal.service";
+import { ArticlesService } from "../../../services/articles.service";
+
 import { Location } from "@angular/common";
 import { ActivatedRoute } from "@angular/router";
+import { AlertModalService } from '../../shared/alert-modal.service';
 
 @Component({
   selector: "app-articles-form",
