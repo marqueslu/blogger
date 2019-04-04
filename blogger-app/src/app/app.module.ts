@@ -9,6 +9,8 @@ import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { SharedModule } from './pages/shared/shared.module';
 
+
+
 @NgModule({
   declarations: [
     AppComponent,

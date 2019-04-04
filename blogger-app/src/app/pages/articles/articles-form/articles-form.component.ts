@@ -4,7 +4,7 @@ import { ArticlesService } from "../../../services/articles.service";
 
 import { Location } from "@angular/common";
 import { ActivatedRoute } from "@angular/router";
-import { AlertModalService } from '../../shared/alert-modal.service';
+import { AlertModalService } from "../../shared/alert-modal.service";
 
 @Component({
   selector: "app-articles-form",
