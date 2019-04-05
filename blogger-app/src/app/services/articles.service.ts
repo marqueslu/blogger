@@ -19,7 +19,7 @@ export class ArticlesService {
     return this.http.get<Article>(`${this.API}/${id}`).pipe(take(1));
   }
 
-  private crate(article: Article) {
+  private create(article: Article) {
     return this.http.post(this.API, article).pipe(take(1));
   }
 
@@ -36,7 +36,7 @@ export class ArticlesService {
       return this.update(article);
     } else {
       article.createdAt = new Date();
-      return this.crate(article);
+      return this.create(article);
     }
   }
 }

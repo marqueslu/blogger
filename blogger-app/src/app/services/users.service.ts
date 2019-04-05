@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { environment } from "src/environments/environment";
 import { HttpClient } from "@angular/common/http";
 import { User } from "../models/user";
+import { take } from "rxjs/operators";
 
 @Injectable({
   providedIn: "root"
@@ -12,5 +13,26 @@ export class UsersService {
 
   list() {
     return this.http.get<User[]>(this.API);
+  }
+
+  save(user: User) {
+    if (user.id) {
+      return this.update(user);
+    } else {
+      return this.create(user);
+    }
+  }
+
+  create(user) {
+    return this.http.post(this.API, user).pipe(take(1));
+  }
+
+  update(user) {
+    console.log(user);
+    return this.http.put(`${this.API}/${user.id}`, user).pipe(take(1));
+  }
+
+  remove(user){
+    return this.http.delete(`${this.API}/${user.id}`).pipe(take(1));
   }
 }
