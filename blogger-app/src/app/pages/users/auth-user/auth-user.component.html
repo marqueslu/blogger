@@ -1,3 +1,32 @@
-<p>
-  auth-user works!
-</p>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 col-lg-6 offset-lg-3">
+      <form class="needs-validation" novalidate [formGroup]="form">
+        <div class="form-row">
+          <div class="col-sm-12">
+            <label for="email">Email</label>
+            <input
+              type="email"
+              class="form-control"
+              placeholder="Email"
+            />
+            <div
+              class="invalid-feedback"
+              *ngIf="hasError('email') && hasError('email')['required']"
+            >
+              Please inform a Email for this user.
+            </div>
+          </div>
+        </div>
+        <div style="margin-top: 1em;" class="buttons-register">
+          <button type="submit" class="btn btn-outline-primary mb-1 btn-sm" (click)="onRegister()">
+            Sign in
+          </button>
+          <button type="submit" class="btn btn-outline-dark mb-1 btn-sm" (click)="onCancel()">
+            Cancel
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
