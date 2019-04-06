@@ -4,7 +4,7 @@ import { Observable, empty } from "rxjs";
 import { User } from "src/app/models/user";
 import { catchError, switchMap, take } from "rxjs/operators";
 import { AlertModalService } from "../../shared/alert-modal.service";
-import { BsModalRef } from 'ngx-bootstrap/modal';
+import { BsModalRef } from "ngx-bootstrap/modal";
 
 @Component({
   selector: "app-users-list",
@@ -15,7 +15,7 @@ export class UsersListComponent implements OnInit {
   users$: Observable<User[]>;
   selectedUser: User;
   deleteModalRef: BsModalRef;
-
+  currentUser: string;
   constructor(
     private service: UsersService,
     private alertService: AlertModalService

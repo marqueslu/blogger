@@ -39,4 +39,9 @@ export class UsersService {
   loadById(id) {
     return this.http.get<User>(`${this.API}/${id}`).pipe(take(1));
   }
+
+
+  authenticate(email){
+    return this.http.get<User>(`${this.API}/?email=${email}`).pipe(take(1));
+  }
 }

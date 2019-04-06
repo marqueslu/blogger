@@ -1,18 +1,23 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { Component, OnInit } from "@angular/core";
+import { FormBuilder, FormGroup } from "@angular/forms";
+import { UsersService } from "src/app/services/users.service";
 
 @Component({
-  selector: 'app-auth-user',
-  templateUrl: './auth-user.component.html',
-  styleUrls: ['./auth-user.component.less']
+  selector: "app-auth-user",
+  templateUrl: "./auth-user.component.html",
+  styleUrls: ["./auth-user.component.less"]
 })
 export class AuthUserComponent implements OnInit {
-
   form: FormGroup;
- 
-  constructor(private fb: FormBuilder) { }
+  currentUser: string;
+  constructor(private fb: FormBuilder, private service: UsersService) {}
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  authenticate(email) {
+    this.service.authenticate(email).subscribe(user => {
+      this.currentUser = user[0].email;
+      localStorage.setItem("currentUser", this.currentUser);
+    });
   }
-
 }
