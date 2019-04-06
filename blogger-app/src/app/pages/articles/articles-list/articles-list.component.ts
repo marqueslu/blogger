@@ -95,7 +95,7 @@ export class ArticlesListComponent implements OnInit {
       },
       error => {
         this.alertService.showAlertDanger(
-          "Error during the remove the course. Try again later"
+          "Error during the remove the article. Try again later"
         );
         this.deleteModalRef.hide();
       }
