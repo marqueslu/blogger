@@ -1,15 +1,13 @@
 import { Injectable } from "@angular/core";
 import {
-  CanActivate,
   ActivatedRouteSnapshot,
   RouterStateSnapshot,
-  UrlTree,
   Resolve
 } from "@angular/router";
 import { Observable, of } from "rxjs";
 
-import { ArticlesService } from "../../../services/articles.service";
-import { Article } from '../../../models/article';
+import { ArticlesService } from "../../services/articles.service";
+import { Article } from '../../models/article';
 
 
 @Injectable({

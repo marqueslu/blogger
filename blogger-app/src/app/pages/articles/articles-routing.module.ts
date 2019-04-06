@@ -2,7 +2,8 @@ import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 import { ArticlesListComponent } from "./articles-list/articles-list.component";
 import { ArticlesFormComponent } from "./articles-form/articles-form.component";
-import { ArticleResolverGuard } from "../guards/article-resolver/article-resolver.guard";
+import { ArticleResolverGuard } from '../../guards/article-resolver/article-resolver.guard';
+
 
 const routes: Routes = [
   { path: "", component: ArticlesListComponent },
