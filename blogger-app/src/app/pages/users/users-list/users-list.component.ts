@@ -61,7 +61,7 @@ export class UsersListComponent implements OnInit {
         },
         error => {
           this.alertService.showAlertDanger(
-            "Error during the remove the course. Try again later"
+            "Error during the remove the user. Try again later"
           );
           this.deleteModalRef.hide();
         }

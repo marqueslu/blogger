@@ -32,7 +32,7 @@ export class UsersService {
     return this.http.put(`${this.API}/${user.id}`, user).pipe(take(1));
   }
 
-  remove(user){
-    return this.http.delete(`${this.API}/${user.id}`).pipe(take(1));
+  remove(userId){    
+    return this.http.delete(`${this.API}/${userId}`).pipe(take(1));
   }
 }
