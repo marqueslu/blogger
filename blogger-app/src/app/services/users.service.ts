@@ -35,4 +35,8 @@ export class UsersService {
   remove(userId){    
     return this.http.delete(`${this.API}/${userId}`).pipe(take(1));
   }
+
+  loadById(id) {
+    return this.http.get<User>(`${this.API}/${id}`).pipe(take(1));
+  }
 }
