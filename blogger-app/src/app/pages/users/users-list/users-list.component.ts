@@ -5,6 +5,7 @@ import { User } from "src/app/models/user";
 import { catchError, switchMap, take } from "rxjs/operators";
 import { AlertModalService } from "../../shared/alert-modal.service";
 import { BsModalRef } from "ngx-bootstrap/modal";
+import { Router, ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: "app-users-list",
@@ -18,7 +19,9 @@ export class UsersListComponent implements OnInit {
   currentUser: string;
   constructor(
     private service: UsersService,
-    private alertService: AlertModalService
+    private alertService: AlertModalService,
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit() {
@@ -33,6 +36,10 @@ export class UsersListComponent implements OnInit {
         return empty();
       })
     );
+  }
+
+  onEdit(id) {
+    this.router.navigate(["edit", id], { relativeTo: this.route });
   }
 
   onDelete(user) {

@@ -23,16 +23,15 @@ export class UsersService {
     }
   }
 
-  create(user) {
+  private create(user) {
     return this.http.post(this.API, user).pipe(take(1));
   }
 
-  update(user) {
-    console.log(user);
+  private update(user) {
     return this.http.put(`${this.API}/${user.id}`, user).pipe(take(1));
   }
 
-  remove(userId){    
+  remove(userId) {
     return this.http.delete(`${this.API}/${userId}`).pipe(take(1));
   }
 
@@ -40,8 +39,7 @@ export class UsersService {
     return this.http.get<User>(`${this.API}/${id}`).pipe(take(1));
   }
 
-
-  authenticate(email){
+  authenticate(email) {
     return this.http.get<User>(`${this.API}/?email=${email}`).pipe(take(1));
   }
 }
