@@ -1,6 +1,6 @@
 # blogger
 
-This project is a POC (proof of concept), to study and implement the knoledge that I learned during my studies using Angular and .NET Core.
+This project is a POC (proof of concept), to implement the knoledge that I learned during my studies using Angular and NodeJS with express and mongodb.
 
 Each project contain your own README.md file, to help you during the configuration of the project environment.
 
