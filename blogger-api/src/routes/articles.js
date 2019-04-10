@@ -1,0 +1,68 @@
+const express = require("express");
+
+const Article = require("../models/article");
+
+const router = express.Router();
+
+router.post("", (req, res, next) => {
+  const article = new Article({
+    title: req.body.title,
+    content: req.body.content
+  });
+
+  article.save().then(createdArticle => {
+    res.status(201).json({
+      message: "Article created with success",
+      article: {
+        ...createdArticle,
+        id: createdArticle._id
+      }
+    });
+  });
+});
+
+router.get("", (req, res, next) => {
+  Article.find().then(articles => {
+    res.status(200).json(articles);
+  });
+});
+
+router.get("/:id", (req, res, next) => {
+  console.log(req.params.id);
+  Article.findById(req.params.id).then(article => {
+    if (article) {
+      res.status(201).json(article);
+    } else {
+      res.status(404).json({ message: "Article not found! " });
+    }
+  });
+});
+
+router.put("/:id", (req, res, next) => {
+  console.log(req.params.id);
+  const article = new Article({
+    _id: req.body.id,
+    title: req.body.title,
+    content: req.body.content
+  });
+
+  Post.updateOne({ _id: req.params.id }, article)
+    .then(result => {
+      res.status(200).json({ message: "Update Successfull!" });
+    })
+    .catch(err => {
+      res.status(404).json({ error: err });
+    });
+});
+
+router.delete("/:id", (req, res, next) => {
+  Article.deleteOne({ _id: req.params.id })
+    .then(result => {
+      res.status(200).json({ message: "Article deleted with success!" });
+    })
+    .catch(err => {
+      res.status(404).json({ error: err });
+    });
+});
+
+module.exports = router;

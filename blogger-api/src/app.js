@@ -3,14 +3,13 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 
 // todo
-// const articlesRoutes = require('./routes/articles');
+const articlesRoutes = require("./routes/articles");
 
 const app = express();
 
 mongoose
   .connect(
     "mongodb+srv://<yourdbuser>:<yourpassword>@cluster0-w014b.mongodb.net/<yourdatabase>?retryWrites=true",
-
     { useNewUrlParser: true }
   )
   .then(() => {
@@ -37,6 +36,6 @@ app.use((req, res, next) => {
 });
 
 // todo
-// app.use('/api/articles', articlesRoutes);
+app.use("/api/articles", articlesRoutes);
 
 module.exports = app;
