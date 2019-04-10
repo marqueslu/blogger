@@ -26,7 +26,7 @@ export class ArticlesFormComponent implements OnInit {
   ngOnInit() {
     const article = this.route.snapshot.data["article"];
     this.form = this.fb.group({
-      id: [article.id],
+      id: [article._id],
       title: [
         article.title,
         [
@@ -50,10 +50,11 @@ export class ArticlesFormComponent implements OnInit {
       let errorMessage = "Error during the criation the article, try again!";
 
       if (this.form.value.id) {
+        
         messageSuccess = "Updated with success!";
         errorMessage = "Error during the update the article, try again!";
-      }
-      this.service.save(this.form.value).subscribe(
+      }      
+      this.service.save(this.form.value).subscribe( 
         success => {
           this.modal.showAlertSuccess(messageSuccess);
           this.location.back();

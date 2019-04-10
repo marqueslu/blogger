@@ -2,17 +2,20 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Article } from "../models/article";
 import { environment } from "src/environments/environment";
-import { take } from "rxjs/operators";
+import { take, map } from "rxjs/operators";
+import { stringify } from '@angular/core/src/render3/util';
 
 @Injectable({
   providedIn: "root"
 })
 export class ArticlesService {
   private readonly API = `${environment.API}/articles`;
+  private articles: Article[] = [];
+
   constructor(private http: HttpClient) {}
 
   list() {
-    return this.http.get<Article[]>(this.API);
+    return this.http.get<Article[]>(this.API).pipe();
   }
 
   loadById(id) {
@@ -27,11 +30,12 @@ export class ArticlesService {
     return this.http.delete(`${this.API}/${id}`).pipe(take(1));
   }
 
-  private update(article: Article) {
+  private update(article) {
     return this.http.put(`${this.API}/${article.id}`, article).pipe(take(1));
   }
 
-  save(article: Article) {
+  save(article) {
+  
     if (article.id) {
       return this.update(article);
     } else {

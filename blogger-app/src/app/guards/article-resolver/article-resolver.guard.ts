@@ -19,13 +19,13 @@ export class ArticleResolverGuard implements Resolve<Article> {
   resolve(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
-  ): Observable<Article> {
+  ): Observable<Article> {    
     if (route.params && route.params["id"]) {
       return this.service.loadById(route.params["id"]);
     }
 
     return of({
-      id: null,
+      _id: null,
       title: null,
       content: null,
       createdAt: null

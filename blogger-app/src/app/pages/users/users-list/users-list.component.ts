@@ -32,7 +32,6 @@ export class UsersListComponent implements OnInit {
     this.users$ = this.service.list().pipe(
       catchError(error => {
         console.log(error);
-        // this.handleError(error);
         return empty();
       })
     );
@@ -44,11 +43,6 @@ export class UsersListComponent implements OnInit {
 
   onDelete(user) {
     this.selectedUser = user;
-
-    // this.deleteModalRef = this.modalService.show(this.deleteModal, {
-    //   class: "modal-sm"
-    // });
-
     const result$ = this.alertService.showConfirm(
       "Confirm",
       "Are you sure that you want to delete this item?"

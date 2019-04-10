@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from "@angular/core";
 import { ArticlesService } from "../../../services/articles.service";
 
 import { Observable, empty, Subject } from "rxjs";
-import { catchError, take, switchMap } from "rxjs/operators";
+import { catchError, take, switchMap, map } from "rxjs/operators";
 
 import { Router, ActivatedRoute } from "@angular/router";
 import { BsModalService, BsModalRef } from "ngx-bootstrap/modal";
@@ -43,23 +43,19 @@ export class ArticlesListComponent implements OnInit {
         this.handleError();
         return empty();
       })
-    );
+    );    
   }
 
   handleError() {
     this.alertService.showAlertDanger("Failed to load the articles.");
   }
 
-  onEdit(id) {
-    this.router.navigate(["edit", id], { relativeTo: this.route });
+  onEdit(article) {
+    this.router.navigate(["edit", article._id], { relativeTo: this.route });
   }
 
   onDelete(article) {
     this.selectedArticle = article;
-
-    // this.deleteModalRef = this.modalService.show(this.deleteModal, {
-    //   class: "modal-sm"
-    // });
 
     const result$ = this.alertService.showConfirm(
       "Confirm",
@@ -70,7 +66,7 @@ export class ArticlesListComponent implements OnInit {
       .pipe(
         take(1),
         switchMap(result =>
-          result ? this.service.remove(this.selectedArticle.id) : empty()
+          result ? this.service.remove(this.selectedArticle._id) : empty()
         )
       )
       .subscribe(
@@ -88,7 +84,7 @@ export class ArticlesListComponent implements OnInit {
   }
 
   onConfirmDelete() {
-    this.service.remove(this.selectedArticle.id).subscribe(
+    this.service.remove(this.selectedArticle._id).subscribe(
       success => {
         this.onRefresh();
         this.deleteModalRef.hide();
