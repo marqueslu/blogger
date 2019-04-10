@@ -2,7 +2,6 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 
-// todo
 const articlesRoutes = require("./routes/articles");
 
 const app = express();
@@ -35,7 +34,6 @@ app.use((req, res, next) => {
   next();
 });
 
-// todo
 app.use("/api/articles", articlesRoutes);
 
 module.exports = app;
