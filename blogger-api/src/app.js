@@ -8,7 +8,8 @@ const app = express();
 
 mongoose
   .connect(
-    "mongodb+srv://<yourdbuser>:<yourpassword>@cluster0-w014b.mongodb.net/<yourdatabase>?retryWrites=true",
+    "mongodb+srv://<your user>:<your password>@cluster0-w014b.mongodb.net/<your database>",
+
     { useNewUrlParser: true }
   )
   .then(() => {

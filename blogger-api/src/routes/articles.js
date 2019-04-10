@@ -7,7 +7,8 @@ const router = express.Router();
 router.post("", (req, res, next) => {
   const article = new Article({
     title: req.body.title,
-    content: req.body.content
+    content: req.body.content,
+    createdAt: req.body.createdAt
   });
 
   article.save().then(createdArticle => {
@@ -27,10 +28,9 @@ router.get("", (req, res, next) => {
   });
 });
 
-router.get("/:id", (req, res, next) => {
-  console.log(req.params.id);
+router.get("/:id", (req, res, next) => {  
   Article.findById(req.params.id).then(article => {
-    if (article) {
+    if (article) {     
       res.status(201).json(article);
     } else {
       res.status(404).json({ message: "Article not found! " });
@@ -38,15 +38,15 @@ router.get("/:id", (req, res, next) => {
   });
 });
 
-router.put("/:id", (req, res, next) => {
-  console.log(req.params.id);
+router.put("/:id", (req, res, next) => {  
   const article = new Article({
-    _id: req.body.id,
+    _id: req.params.id,
     title: req.body.title,
-    content: req.body.content
+    content: req.body.content,
+    createdAt: req.body.createdAt
   });
 
-  Post.updateOne({ _id: req.params.id }, article)
+  Article.updateOne({ _id: req.params.id }, article)
     .then(result => {
       res.status(200).json({ message: "Update Successfull!" });
     })
